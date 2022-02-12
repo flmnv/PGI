@@ -75,7 +75,7 @@ class ImageWork:
 
                 img_color.putpixel((x, y), (rgb, rgb, rgb))
 
-        img_color.show()
+        return img_color
 
     def rotate_270(self, img: Image.Image):
         rotate_img = Image.new('RGB', (img.height, img.width))
