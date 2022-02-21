@@ -13,7 +13,7 @@ def main():
         input_img, output_logo_no_bg)
 
     output_logo_no_bg.save('output_logo_no_bg.png')
-    output_img_with_logo.save('output_img_with_logo.png')
+    output_img_with_logo.save('output_img_with_logo.bmp')
 
     input_img.close()
     input_logo.close()
