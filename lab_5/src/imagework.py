@@ -27,7 +27,7 @@ class ImageWork:
 
     def resize(self, img: Image.Image, size_multiply: int):
         img_resize = Image.new(
-            'RGB', (round(img.size[0] * size_multiply), round(img.size[1] * size_multiply)))
+            'RGB', (round(img.width * size_multiply), round(img.height * size_multiply)))
 
         if size_multiply < 0.1 or size_multiply > 10:
             raise ImageWorkException('Incorrect size_multiply value (0.1 <= size_multiply <= 10)')
@@ -38,7 +38,7 @@ class ImageWork:
                     resize_x = round(x * size_multiply)
                     resize_y = round(y * size_multiply)
 
-                    if resize_x >= img_resize.size[0] or resize_y >= img_resize.size[1]:
+                    if resize_x >= img_resize.width or resize_y >= img_resize.height:
                         continue
 
                     img_resize.putpixel(
@@ -46,9 +46,6 @@ class ImageWork:
                         value=img.getpixel((x, y)))
         elif size_multiply > 1:
             enlarged_pixel = ceil(size_multiply)
-
-            img_resize = self.__put_square(
-                img_resize, (0, 0), enlarged_pixel, (123, 123, 123))
 
             for x in range(img.width):
                 for y in range(img.height):
