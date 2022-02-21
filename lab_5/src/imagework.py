@@ -1,5 +1,4 @@
-import time
-from math import ceil, cos, pi, sin, sqrt
+from math import ceil
 from random import randint
 
 from PIL import Image
@@ -30,11 +29,10 @@ class ImageWork:
         img_resize = Image.new(
             'RGB', (round(img.size[0] * size_multiply), round(img.size[1] * size_multiply)))
 
-        print(img_resize.size)
-
         if size_multiply < 0.1 or size_multiply > 10:
-            raise ImageWorkException()
-        elif size_multiply < 1:
+            raise ImageWorkException('Incorrect size_multiply value (0.1 <= size_multiply <= 10)')
+        
+        if size_multiply < 1:
             for x in range(img.width):
                 for y in range(img.height):
                     resize_x = round(x * size_multiply)
@@ -47,7 +45,6 @@ class ImageWork:
                         xy=(resize_x, resize_y),
                         value=img.getpixel((x, y)))
         elif size_multiply > 1:
-            s_time = time.time()
             enlarged_pixel = ceil(size_multiply)
 
             img_resize = self.__put_square(
@@ -61,8 +58,6 @@ class ImageWork:
                     img_resize = self.__put_square(
                         img=img_resize, xy=(resize_x, resize_y),
                         size=enlarged_pixel, value=img.getpixel((x, y)))
-
-            print(time.time() - s_time)
         else:
             return img
 
